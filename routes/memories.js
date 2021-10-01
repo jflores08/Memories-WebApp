@@ -14,11 +14,12 @@ router.get('/', (req, res, next) =>{
 
 //create a  memory
 router.post('/', (req, res, next) =>{
-  const { title, description, pic} = req.body;
+  const { title, description, pic, tagline} = req.body;
   Memory.create({
     title,
     description,
-    pic
+    pic,
+    tagline
   })
     .then(memory => {
       res.status(201).json(memory);
@@ -52,8 +53,8 @@ router.get('/:id', (req,  res, next) => {
 
 //update a memory
 router.put('/:id', (req, res, next) => {
-    const {title, description, pic} = req.body;
-    Memory.findByIdAndUpdate(req.params.id, {title: title, description: description, pic: pic}, {new: true})
+    const {title, description, pic, tagline} = req.body;
+    Memory.findByIdAndUpdate(req.params.id, {title: title, description: description, pic: pic, tagline: tagline}, {new: true})
       .then(updatedMemory =>{
           res.status(200).json(updatedMemory);
       })

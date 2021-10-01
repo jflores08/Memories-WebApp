@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import HomePage from './pages/HomePage';
+import {Switch, Route} from 'react-router-dom';
+import Navbar from './components/Navbar';
+import MemoriesMapPage from './pages/MemoriesMapPage';
+import MemoryDetailPage from './pages/MemoryDetailPage';
+import MemoryEditPage from './pages/MemoryEditPage';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Navbar />
+
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/memories' component={MemoriesMapPage} />
+        <Route exact path='/memories/:id' component={MemoryDetailPage} />
+        <Route exact path='/memories/edit/:id' component={MemoryEditPage} />
+      </Switch>
+   
     </div>
   );
 }
