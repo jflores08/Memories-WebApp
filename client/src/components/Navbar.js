@@ -1,21 +1,49 @@
 import React from 'react'
 import{Link} from "react-router-dom";
+import { logout } from '../Services/auth';
 
-export default function Navbar() {
+export default function Navbar(props) {
+    
+    const handleLogout = () => {
+        logout().then(() => {
+            props.setUser(null);
+        })
+    }
+
     return (
         <nav>
-            <Link to='/'>
+        {props.user ? (
+
+            <>
+
+                <Link to='/'>
                 <button>Home</button>
-            </Link>
-            <Link to='/memories'>
+                </Link>
+                <Link to='/memories'>
                 <button>Memories</button>
-            </Link>
-            <Link to='/signup'>
+                </Link>
+                <Link to="/" onClick={() => handleLogout()}>
+                <button>Logout</button>
+                </Link>
+
+            </>
+
+        ) : (
+
+            <>
+
+                <Link to='/signup'>
                 <button>SignUp</button>
-            </Link>
-            <Link to='/login'>
-                <button>LogIn</button>
-            </Link>
+                </Link>
+                <Link to='/login'>
+                    <button>LogIn</button>
+                </Link>
+
+            </>
+
+        )}
+            
+           
         </nav>
     )
 }

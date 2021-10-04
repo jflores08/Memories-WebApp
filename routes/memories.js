@@ -12,6 +12,15 @@ router.get('/', (req, res, next) =>{
       .catch(err => next(err));
 });
 
+// //get all memories
+// router.get('/', (req, res, next) =>{
+//   Memory.find()
+//     .then(memories =>{
+//        res.status(200).json(memories);
+//     })
+//     .catch(err => next(err));
+// });
+
 //create a  memory
 router.post('/', (req, res, next) =>{
   const { title, description, pic, tagline, location, radius} = req.body;

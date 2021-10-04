@@ -23,11 +23,13 @@ function App(props) {
   return (
     <div className="App">
 
-      <Navbar />
+      <Navbar user={user} setUser={addUser} {...props} />
 
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/memories' component={MemoriesMapPage} />
+        <Route exact path='/memories' 
+        render={props => <MemoriesMapPage  user={user} {...props} />}
+        />
         <Route exact path='/memories/:id' component={MemoryDetailPage} />
         <Route exact path='/memories/edit/:id' component={MemoryEditPage} />
         <Route exact path='/signup' 
