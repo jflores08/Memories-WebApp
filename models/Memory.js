@@ -6,6 +6,8 @@ const memorySchema = new Schema({
     tagline: String,
     description: String,
     pic: String,
+    location: Array,
+    radius: Number
 });
 
 const Memory = mongoose.model('Memory', memorySchema);

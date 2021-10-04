@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -14,6 +15,8 @@ export default function MemoryEditPage(props) {
 	const [description, setDescription] = useState('');
     const [pic, setPic] = useState('');
     const [tagline, setTagline] = useState('');
+    const [location, setLocation] = useState([]);
+    const [radius, SetRadius] = useState(1);
 
     useEffect(() => {
         axios.get(`${api_URL}/api/memories/${memoryId}`)
@@ -24,6 +27,8 @@ export default function MemoryEditPage(props) {
             setDescription(response.data.description)
             setPic(response.data.pic)
             setTagline(response.data.tagline)
+            setLocation(response.data.location)
+            SetRadius(response.data.radius)
 
         })
         .catch(err => console.log(err))
@@ -107,10 +112,21 @@ export default function MemoryEditPage(props) {
                             <label htmlFor='tagline'>Tagline: </label>
                                 <input
 
-                                    type='tagline'
+                                    type='text'
                                     name='tagline'
                                     value={tagline}
                                     onChange={e => setTagline(e.target.value)}
+
+                                />
+                                <br></br><br></br>
+
+                            <label htmlFor='radius'> Radius: </label>
+                                <input
+
+                                    type='number'
+                                    name='radius'
+                                    value={radius}
+                                    onChange={e => SetRadius(e.target.value)}
 
                                 />
 

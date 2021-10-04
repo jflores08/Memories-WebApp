@@ -9,6 +9,8 @@ export default function AddMemory(props) {
 	const [description, setDescription] = useState('');
     const [pic, setPic] = useState('');
     const [tagline, setTagline] = useState('');
+    const [location, setLocation] = useState([]);
+    const [radius, SetRadius] = useState(1);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -21,6 +23,8 @@ export default function AddMemory(props) {
                     setDescription('');
                     setPic('');
                     setTagline('');
+                    setLocation([]);
+                    SetRadius();
                     console.log(props);
                     props.refreshMemories(props);
                     
@@ -75,10 +79,21 @@ export default function AddMemory(props) {
                     <label htmlFor='tagline'>Tagline: </label>
                         <input
 
-                            type='tagline'
+                            type='text'
                             name='tagline'
                             value={tagline}
                             onChange={e => setTagline(e.target.value)}
+
+                        />
+                        <br></br><br></br>
+
+                    <label htmlFor='radius'> Radius: </label>
+                         <input
+
+                                    type='number'
+                                    name='radius'
+                                    value={radius}
+                                    onChange={e => SetRadius(e.target.value)}
 
                         />
 

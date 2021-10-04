@@ -10,6 +10,12 @@ export default function Navbar() {
             <Link to='/memories'>
                 <button>Memories</button>
             </Link>
+            <Link to='/signup'>
+                <button>SignUp</button>
+            </Link>
+            <Link to='/login'>
+                <button>LogIn</button>
+            </Link>
         </nav>
     )
 }
