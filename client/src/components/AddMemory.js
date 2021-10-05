@@ -9,22 +9,30 @@ export default function AddMemory(props) {
 	const [description, setDescription] = useState('');
     const [pic, setPic] = useState('');
     const [tagline, setTagline] = useState('');
+    const [tags, setTags] = useState([]);
     const [location, setLocation] = useState([]);
     const [radius, SetRadius] = useState(1);
+    const [likeCount, SetLikeCount] = useState(0);
+    const [createdAT, setCreatedAt] = useState({});
 
     const handleSubmit = e => {
         e.preventDefault();
 
         // add pic
-        const requestBody = {title, description, pic, tagline };
-            axios.post(`${api_URL}/api/memories`, requestBody)
+        const requestBody = {title, description, pic, tagline, radius};
+        console.log(requestBody);    
+        axios.post(`${api_URL}/api/memories/add`, requestBody)
+            
                 .then(response => {
                     setTitle('');
                     setDescription('');
                     setPic('');
                     setTagline('');
+                    setTags();
                     setLocation([]);
                     SetRadius();
+                    SetLikeCount();
+                    setCreatedAt({});
                     console.log(props);
                     props.refreshMemories(props);
                     
@@ -86,6 +94,16 @@ export default function AddMemory(props) {
 
                         />
                         <br></br><br></br>
+
+                    <label htmlFor='radius'> Radius: </label>
+                         <input
+
+                                    type='number'
+                                    name='radius'
+                                    value={radius}
+                                    onChange={e => SetRadius(e.target.value)}
+
+                        />
 
                     <label htmlFor='radius'> Radius: </label>
                          <input

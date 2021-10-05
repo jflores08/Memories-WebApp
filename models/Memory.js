@@ -1,13 +1,24 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 const Schema = mongoose.Schema;
 // TODO: Please make sure you edit the user model to whatever makes sense in this case
 const memorySchema = new Schema({
     title: String,
     tagline: String,
+    tags: [String],
     description: String,
     pic: String,
-    location: Array,
-    radius: Number
+    location: [String],
+    radius: Number,
+    likeCount: Number,
+    User: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    createdAT:{
+        type:Date,
+        default: new Date()
+    }
 });
 
 const Memory = mongoose.model('Memory', memorySchema);

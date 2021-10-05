@@ -5,6 +5,7 @@ const router = require("express").Router();
 
 //get all memories
 router.get('/', (req, res, next) =>{
+  console.log(req.session.user)
     Memory.find()
       .then(memories =>{
          res.status(200).json(memories);
@@ -22,22 +23,29 @@ router.get('/', (req, res, next) =>{
 // });
 
 //create a  memory
-router.post('/', (req, res, next) =>{
-  const { title, description, pic, tagline, location, radius} = req.body;
-  Memory.create({
-    title,
-    description,
-    pic,
-    tagline,
-    location,
-    radius
-  })
-    .then(memory => {
-      res.status(201).json(memory);
-    })
-    .catch(err =>{
-      next(err);
-    })
+router.post('/add', (req, res, next) =>{
+  //const { title, description, pic, tagline, radius, } = req.body;
+  console.log('This is the session from post route: ', req.session.user)
+
+  // Memory.create({
+  //   title: title,
+  //   description: description,
+  //   pic:'',
+  //   tagline: tagline,
+  //   tags:'',
+  //   location: '',
+  //   radius: radius,
+  //   owner: req.session.user._id,
+  //   createdAt: null,
+  //   likeCount: 0
+
+  // })
+  //   .then(memory => {
+  //     res.status(201).json(memory);
+  //   })
+  //   .catch(err =>{
+  //     next(err);
+  //   })
 })
 
 
