@@ -1,12 +1,11 @@
-// import accessToken from '..../.env'
+
+// accessToken = 'pk.eyJ1Ijoiam9uNjEiLCJhIjoiY2t1ZTZ1Zzc1MWVicjJvbXhpeTF4b2h2bSJ9.U2K0n8U4u5QVCJ0GXI6QHQ';
 
 // export default function mapbox(){
 //     return(
 //     mapboxgl.accessToken = accessToken;
 
 //     const center = [13.4532321, 52.5331092]
-
-//     <div>
 //     const map = new mapboxgl.Map({
 //         container: 'map', // container ID
 //         style: 'mapbox://styles/jon61/cku5hizxv2ll918tiz3zbkvhb', // style URL
@@ -15,6 +14,9 @@
 //         zoom: 10, // starting zoom
 //         pitch: 30
 //     });
+
+//     <div>
+    
 //     let currentZoom = map.getZoom()
 //     console.log (currentZoom)
 //     const nav = new mapboxgl.NavigationControl();
@@ -32,4 +34,4 @@
 //     }
 //     </div>
 //     )
-// }
+}

@@ -1,5 +1,6 @@
 import React from 'react'
-// import Mapbox from '../components/Mapbox'
+import Mapp from '../Map'
+
 
 export default function HomePage() {
     return (
@@ -7,7 +8,7 @@ export default function HomePage() {
             <h1> Imagine a Home Page 🦄 🌈</h1>
             <div id='map' style={{width: '100vw', height: '100vh'}}></div>
                 <div>
-                {/* < Mapbox /> */}
+                    <Mapp />
                 </div>
 
         </div>

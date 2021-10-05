@@ -9,7 +9,7 @@ import SignUpPage from './pages/SignUpPage';
 import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
-import socketIOClient from 'socket.io-client'
+import socketIOClient from 'socket.io-client';
 
 const socket = socketIOClient('http://localhost:5005')
 
