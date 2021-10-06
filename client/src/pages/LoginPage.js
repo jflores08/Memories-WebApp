@@ -24,7 +24,7 @@ export default function LoginPage(props) {
     
                     props.setUser(response);
     
-                    props.history.push('/memories');
+                    props.history.push('/memories/profile');
                 }
                 
             })

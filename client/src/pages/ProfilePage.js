@@ -31,7 +31,9 @@ export default function ProfilePage(props) {
                 console.log('data is: ', response.data)
                 console.log('userId from database is: ', response.data.User)
                 setMemories(response.data)
+            
                 setUserMemories(memories.filter(filterUserId))
+                console.log ('User Memories', userMemories)
 
             })
             .catch(err => console.log(err));
