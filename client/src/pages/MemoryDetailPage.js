@@ -12,7 +12,7 @@ export default function MemoryDetailPage(props) {
     const memoryId = props.match.params.id;
 
     const getMemory = () => {
-        axios.get(`${api_URL}/api/memories/${memoryId}`)
+        axios.get(`/api/memories/${memoryId}`)
             .then(response => {
                 console.log(response);
                 setMemory(response.data);

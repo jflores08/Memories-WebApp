@@ -19,7 +19,7 @@ export default function MemoryEditPage(props) {
     const [radius, SetRadius] = useState(1);
 
     useEffect(() => {
-        axios.get(`${api_URL}/api/memories/${memoryId}`)
+        axios.get(`/api/memories/${memoryId}`)
         .then(response =>{
             console.log(response);
             setMemory(response.data)
@@ -35,7 +35,7 @@ export default function MemoryEditPage(props) {
     }, [])
 
     const deleteMemory = () => {
-        axios.delete(`${api_URL}/api/memories/${memoryId}`)
+        axios.delete(`/api/memories/${memoryId}`)
             .then(() => {
                 props.history.push('/memories');
             })
@@ -45,7 +45,7 @@ export default function MemoryEditPage(props) {
     const handleSubmit = e => {
         e.preventDefault();
         const requestBody = {title, description, pic, tagline };
-        axios.put(`${api_URL}/api/memories/${memoryId}`, requestBody)
+        axios.put(`/api/memories/${memoryId}`, requestBody)
             .then(response => {
                 props.history.push(`/memories/${memoryId}`);
             })

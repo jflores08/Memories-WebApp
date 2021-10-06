@@ -26,7 +26,7 @@ function App(props) {
   return (
     <div className="App">
 
-      <Navbar user={user} setUser={addUser} {...props} />
+      <Navbar user={user} setUser={addUser} />
 
       <Switch>
         <Route exact path='/' component={HomePage} />
