@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function AddMemory(props) {
 
-    // const api_URL = 'http://localhost:5005';
+    const api_URL = 'http://localhost:5005';
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
