@@ -15,8 +15,8 @@ const memorySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    createdAT:{
-        type:Date,
+    createdAT: {
+        type: Date,
         default: new Date()
     }
 });

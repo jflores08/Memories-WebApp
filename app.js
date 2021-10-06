@@ -12,23 +12,21 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-app.use(bodyParser.json({limit:'30mb', extended: true}));
-app.use(bodyParser.urlencoded({limit:'30mb', extended: true}));
+app.use(bodyParser.json({ limit: '30mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
 
-// session configuration
-const session = require("express-session");
-const passport = require("passport");
 
-require("./config/passport");
 
 // ADD SESSION SETTINGS HERE:
 
+
+const session = require('express-session');
 const MongoStore = require('connect-mongo');
-const DB_URL = 'mongodb://localhost/Memories_app'
+const DB_URL = "mongodb://localhost/Memories_app"
 
 app.use(
   session({
@@ -42,9 +40,6 @@ app.use(
     })
   })
 )
-
-
-
 
 // end of session configuration
 

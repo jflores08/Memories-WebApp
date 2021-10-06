@@ -46,7 +46,7 @@ class Map extends React.Component{
 	}
 
 	// Create map and lay over markers
-	componentDidMount(props){
+	componentDidMount(){
 
 		
 
