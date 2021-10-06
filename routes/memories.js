@@ -35,7 +35,7 @@ router.post('/add', (req, res, next) =>{
     tags:'',
     location: '',
     radius: radius,
-    owner: req.session.user._id,
+    User: req.session.user._id,
     createdAt: null,
     likeCount: 0
 

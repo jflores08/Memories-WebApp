@@ -12,28 +12,28 @@ mapboxgl.accessToken='pk.eyJ1Ijoiam9uNjEiLCJhIjoiY2t1ZTZ1Zzc1MWVicjJvbXhpeTF4b2h
 // Sample data 
 const data = [
 	{
-		"location": "Manhattan Ave & Norman Ave at NE corner",
+		"Title": "Manhattan Ave & Norman Ave at NE corner",
 		"city": "Brooklyn",
 		"state": "New York",
-		"coordinates": [-73.9516030004786,40.72557300071668],
+		"location": [-73.9516030004786,40.72557300071668],
 	},
 	{
-		"location": "6th Ave & 42nd St at NW corner",
+		"Title": "6th Ave & 42nd St at NW corner",
 		"city": "Manhattan",
 		"state": "New York",
-		"coordinates": [-73.98393399979334,40.75533300052329],
+		"location": [-73.98393399979334,40.75533300052329],
 	},
 	{
-		"location": "Essex St & Delancey St at SE corner",
+		"Title": "Essex St & Delancey St at SE corner",
 		"city": "Manhattan",
 		"state": "New York",
-		"coordinates": [-73.9882730001973,40.718207001246554],
+		"location": [-73.9882730001973,40.718207001246554],
 	}
 ]
 
 
 
-class Mapp extends React.Component{
+class Map extends React.Component{
 
 	// Set up states for updating map 
 	constructor(props){
@@ -65,18 +65,20 @@ class Mapp extends React.Component{
 			style: 'mapbox://styles/jon61/cku5hizxv2ll918tiz3zbkvhb',
             center: center, // starting position [lng, lat]
             doubleClickZoom: true,
-            zoom: 10, // starting zoom
+            zoom: 12, // starting zoom
             pitch: 30 
 			
             
 			
 		})
+
+
         map.addControl(nav, 'top-left');
     
         
        
-        const currentZoom = map.getZoom()
-        
+        const currentZoom = map.getZoom();
+        console.log('The current zoom is: ', currentZoom);
 
         
         // function GetZoom() {
@@ -90,20 +92,21 @@ class Mapp extends React.Component{
         
             
 
-        {(currentZoom < 9)&&(
+        // {(currentZoom > 9)&&(
             popup.setLngLat(center)
                 .setHTML('<h1>Ahoy Mattie ⛵️🏴‍☠️</h1>')
-                .setMaxWidth('100px')
+                .setMaxWidth('500px')
                 .addTo(map)
-            )
-        }
+            
+        
      	
 		data.forEach((location) => {
 			console.log(location)
-			var marker = new mapboxgl.Marker()
-							.setLngLat(location.coordinates)
-							.setPopup(new mapboxgl.Popup({ offset: 30 })
-							.setHTML('<h4>' + location.city + '</h4>' + location.location))
+			// var marker = new mapboxgl.Marker()
+						popup.setLngLat(location.location)
+							// .setPopup(new mapboxgl.Popup({ offset: 30 })
+							.setHTML('<h4>' + location.city + '</h4>' + location.Title)
+                            .setMaxWidth('100px')
 							.addTo(map);
 
 		})
@@ -118,4 +121,4 @@ class Mapp extends React.Component{
 	}
 }
 
-export default Mapp;
+export default Map;

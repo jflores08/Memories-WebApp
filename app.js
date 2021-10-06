@@ -28,7 +28,7 @@ require("./config/passport");
 // ADD SESSION SETTINGS HERE:
 
 const MongoStore = require('connect-mongo');
-const DB_URL = 'mongodb://localhost/pm-app'
+const DB_URL = 'mongodb://localhost/Memories_app'
 
 app.use(
   session({
@@ -43,9 +43,7 @@ app.use(
   })
 )
 
-// USE passport.initialize() and passport.session() HERE:
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 
 // end of session configuration
