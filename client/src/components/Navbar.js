@@ -10,6 +10,8 @@ export default function Navbar(props) {
         })
     }
 
+    
+
     return (
         <nav>
         {props.user ? (
@@ -18,6 +20,9 @@ export default function Navbar(props) {
 
                 <Link to='/'>
                 <button>Home</button>
+                </Link>
+                <Link to='/memories/profile'>
+                <button>Profile</button>
                 </Link>
                 <Link to='/memories'>
                 <button>Memories</button>

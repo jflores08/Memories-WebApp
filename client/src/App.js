@@ -10,6 +10,7 @@ import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import socketIOClient from 'socket.io-client';
+import ProfilePage from './pages/ProfilePage';
 
 const socket = socketIOClient('http://localhost:5005')
 
@@ -48,6 +49,14 @@ function App(props) {
           exact path='/memories'
           user={user}
           component={MemoriesMapPage}
+         />
+
+        <ProtectedRoute 
+          exact path='/memories/profile'
+          user={user}
+          setUser={addUser}
+          {...props}
+          component={ProfilePage}
          />
 
         <Route exact path='/memories/:id' component={MemoryDetailPage} />
