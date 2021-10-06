@@ -11,12 +11,12 @@ const memorySchema = new Schema({
     location: [String],
     radius: Number,
     likeCount: Number,
-    User: {
+    owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    createdAT:{
-        type:Date,
+    createdAT: {
+        type: Date,
         default: new Date()
     }
 });

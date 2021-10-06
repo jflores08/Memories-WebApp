@@ -1,6 +1,6 @@
 const app = require("./app");
-const socket = require('socket.io');
-const cors = require('cors');
+// const socket = require('socket.io');
+// const cors = require('cors');
 
 
 
@@ -15,19 +15,19 @@ const server = app.listen(PORT, () => {
 
 
 
-const io = socket(server, {
-  cors: {
-    origin: 'http://localhost:3000'
-  }
-});
+// const io = socket(server, {
+//   cors: {
+//     origin: 'http://localhost:3000'
+//   }
+// });
 
-io.on('connection', socket => {
-  console.log('socket id: ', socket.id);
-  console.log('new connection');
-  socket.on('new-message', payload => {
-    console.log('message: ', payload)
-    // send this message to all other connected clients
-    io.emit('message', payload);
-  })
+// io.on('connection', socket => {
+//   console.log('socket id: ', socket.id);
+//   console.log('new connection');
+//   socket.on('new-message', payload => {
+//     console.log('message: ', payload)
+//     // send this message to all other connected clients
+//     io.emit('message', payload);
+//   })
 
-})
+// })
