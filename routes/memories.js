@@ -24,28 +24,28 @@ router.get('/', (req, res, next) =>{
 
 //create a  memory
 router.post('/add', (req, res, next) =>{
-  //const { title, description, pic, tagline, radius, } = req.body;
+  const { title, description, pic, tagline, radius, } = req.body;
   console.log('This is the session from post route: ', req.session.user)
 
-  // Memory.create({
-  //   title: title,
-  //   description: description,
-  //   pic:'',
-  //   tagline: tagline,
-  //   tags:'',
-  //   location: '',
-  //   radius: radius,
-  //   owner: req.session.user._id,
-  //   createdAt: null,
-  //   likeCount: 0
+  Memory.create({
+    title: title,
+    description: description,
+    pic:'',
+    tagline: tagline,
+    tags:'',
+    location: '',
+    radius: radius,
+    owner: req.session.user._id,
+    createdAt: null,
+    likeCount: 0
 
-  // })
-  //   .then(memory => {
-  //     res.status(201).json(memory);
-  //   })
-  //   .catch(err =>{
-  //     next(err);
-  //   })
+  })
+    .then(memory => {
+      res.status(201).json(memory);
+    })
+    .catch(err =>{
+      next(err);
+    })
 })
 
 

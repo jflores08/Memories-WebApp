@@ -4,6 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import mapboxgl from 'mapbox-gl';
 
+
+
 mapboxgl.accessToken='pk.eyJ1Ijoiam9uNjEiLCJhIjoiY2t1ZTZ1Zzc1MWVicjJvbXhpeTF4b2h2bSJ9.U2K0n8U4u5QVCJ0GXI6QHQ';
 
 
@@ -29,6 +31,8 @@ const data = [
 	}
 ]
 
+
+
 class Mapp extends React.Component{
 
 	// Set up states for updating map 
@@ -42,9 +46,20 @@ class Mapp extends React.Component{
 	}
 
 	// Create map and lay over markers
-	componentDidMount(){
+	componentDidMount(props){
+
+		
 
         const center = [13.4532321, 52.5331092]
+        
+        
+
+        const popup = new mapboxgl.Popup({
+            closeButton: true
+        });
+
+        const nav = new mapboxgl.NavigationControl();
+
 		const map = new mapboxgl.Map({
 			container: this.mapContainer,
 			style: 'mapbox://styles/jon61/cku5hizxv2ll918tiz3zbkvhb',
@@ -53,8 +68,36 @@ class Mapp extends React.Component{
             zoom: 10, // starting zoom
             pitch: 30 
 			
+            
+			
 		})
+        map.addControl(nav, 'top-left');
+    
+        
+       
+        const currentZoom = map.getZoom()
+        
 
+        
+        // function GetZoom() {
+
+             
+        //      console.log ('current zoom is:', currentZoom)
+
+        //     return(currentZoom)
+        // };
+
+        
+            
+
+        {(currentZoom < 9)&&(
+            popup.setLngLat(center)
+                .setHTML('<h1>Ahoy Mattie ⛵️🏴‍☠️</h1>')
+                .setMaxWidth('100px')
+                .addTo(map)
+            )
+        }
+     	
 		data.forEach((location) => {
 			console.log(location)
 			var marker = new mapboxgl.Marker()
@@ -69,7 +112,7 @@ class Mapp extends React.Component{
 	render(){
 		return(
 			<div>
-				<div ref={el => this.mapContainer = el} style={{width:'50%', height:'100vh'}}/>
+				<div ref={el => this.mapContainer = el} style={{width:'100%', height:'100vh'}}/>
 			</div>
 		)
 	}

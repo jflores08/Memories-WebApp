@@ -12,7 +12,7 @@ export default function MemoriesMapPage() {
     const [memories, setmemories] = useState([]);
 
     const getUserMemories = () => {
-        axios.get(`${api_URL}/api/memories`)
+        axios.get(`/api/memories`)
         .then(response => {
             console.log(response)
             setmemories(response.data)

@@ -21,7 +21,7 @@ export default function AddMemory(props) {
         // add pic
         const requestBody = {title, description, pic, tagline, radius};
         console.log(requestBody);    
-        axios.post(`${api_URL}/api/memories/add`, requestBody)
+        axios.post(`/api/memories/add`, requestBody)
             
                 .then(response => {
                     setTitle('');
@@ -34,7 +34,7 @@ export default function AddMemory(props) {
                     SetLikeCount();
                     setCreatedAt({});
                     console.log(props);
-                    props.refreshMemories(props);
+                    props.refreshMemories();
                     
                 })
                 .catch(err => console.log(err))

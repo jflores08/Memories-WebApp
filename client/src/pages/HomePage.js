@@ -1,14 +1,34 @@
 import React from 'react'
 import Mapp from '../Map'
+import './HomePage.css'
+import { useState, useEffect } from 'react';
 
 
-export default function HomePage() {
+
+
+
+
+
+export default function HomePage(props) {
+
+    const [currentZoom, setCurrentZoom] = useState('');
+
+    // useEffect(() =>{
+    //     setCurrentZoom = props.map.getZoom();
+    // }, )
+
+    
+
+    // setCurrentZoom (this.map.getZoom())
+    
+    // console.log(currentZoom);
+
     return (
         <div>
             <h1> Imagine a Home Page 🦄 🌈</h1>
-            <div id='map' style={{width: '100vw', height: '100vh'}}></div>
-                <div>
-                    <Mapp />
+            {/* <div id='map' style={{width: '100vw', height: '100vh'}}></div> */}
+                <div id='mapbox'>
+                    <Mapp onStyleLoad={ el => this.map = el }/>
                 </div>
 
         </div>

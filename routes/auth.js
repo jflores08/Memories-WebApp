@@ -1,86 +1,83 @@
-const router = require("express").Router();
-const User = require('../models/User');
-const bcrypt = require('bcrypt');
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
 
-router.post('/login', (req, res, next) => {
-	const { username, password } = req.body;
-	// check if we have a user with that username in the database
-	User.findOne({ username: username })
-		.then(userFromDB => {
-			if (userFromDB === null) {
-				// if not -> the username is not correct -> show login again
-				res.status(400).json({ message: 'incorrect credentials' })
-			}
-			// username is correct
-			// we check the password from the input against the hash in the database
-			// compareSync() returns true or false 
-			if (bcrypt.compareSync(password, userFromDB.password)) {
-				// if it matches -> all credentials are correct
-				// we log the user in
-				req.session.user = userFromDB;
-				res.status(200).json(userFromDB);
-			} else {
-				// if the password is not matching -> show the form again 
-				res.status(400).json({ message: 'incorrect credentials' })
-			}
-		})
+// POST api/auth/signup
+router.post("/signup", (req, res) => {
+  const { username, password } = req.body;
+
+  if (!password || password.length < 8) {
+    return res
+      .status(400)
+      .json({ message: "Your password must be 8 char. min." });
+  }
+  if (!username) {
+    return res.status(400).json({ message: "Your username cannot be empty" });
+  }
+
+  User.findOne({ username: username })
+    .then(found => {
+      if (found) {
+        return res
+          .status(400)
+          .json({ message: "This username is already taken" });
+      }
+
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync(password, salt);
+
+      return User.create({ username: username, password: hash }).then(
+        dbUser => {
+          // Login the user on signup
+
+          req.login(dbUser, err => {
+            if (err) {
+              return res
+                .status(500)
+                .json({ message: "Error while attempting to login" });
+            }
+            res.json(dbUser);
+          });
+        }
+      );
+    })
+    .catch(err => {
+      res.json(err);
+    });
 });
 
-
-router.post('/signup', (req, res, next) => {
-	console.log(req.body);
-	const { username, password } = req.body;
-	// validation
-	// is the password 4+ chars
-	if (password.length < 4) {
-		// if not show the signup form again with a message
-		res.status(400).json({ message: 'Your password needs to be 4 chars min' });
-		return;
-	}
-	// is the username empty
-	if (username.length === 0) {
-		res.status(400).json({ message: 'Username cannot be empty' });
-		return;
-	}
-	// validation passed
-	// we now check if the username already exists
-	User.findOne({ username: username })
-		.then(userFromDB => {
-			// if user exists 
-			if (userFromDB !== null) {
-				// we render signup again
-				res.status(400).json({ message: 'Username is already taken' });
-			} else {
-				// if we reach this line the username can be used
-				// password as the value for the password field
-				const salt = bcrypt.genSaltSync();
-				const hash = bcrypt.hashSync(password, salt);
-				console.log(hash);
-				// we create a document for that user in the db with the hashed 
-				User.create({ username: username, password: hash })
-					.then(createdUser => {
-						console.log(createdUser);
-                        req.session.user = createdUser
-						res.status(200).json(createdUser);
-					})
-					.catch(err => {
-						next(err);
-					})
-			}
-		})
+// POST /api/auth/login
+router.post("/login", (req, res) => {
+  passport.authenticate("local", (err, user) => {
+    if (err) {
+      return res.status(500).json({ message: "Error while authenticating" });
+    }
+    if (!user) {
+      return res.status(400).json({ message: "Wrong credentials" });
+    }
+    req.login(user, err => {
+      if (err) {
+        return res
+          .status(500)
+          .json({ message: "Error while attempting to login" });
+      }
+      return res.json(user);
+    });
+  })(req, res);
 });
 
-
-router.get ('/loggedin', (req, res, next) => {
-    console.log('this is the loggedin in user from the session: ', req.session.user)
-    const user = req.session.user;
-    res.json(user);
+// DELETE /api/auth/logout
+router.delete("/logout", (req, res) => {
+  req.logout();
+  res.json({ message: "Successful logout" });
 });
 
-
-router.delete('/logout', (req, res, next) => {
-    req.session.destroy();
-    res.status(200).json({message: 'logout successful'});
-})
+// checks if the user has an active session
+// GET /api/auth/loggedin
+router.get("/loggedin", (req, res) => {
+  res.json(req.user);
+});
 
 module.exports = router;

@@ -20,23 +20,34 @@ require("./config")(app);
 
 
 // session configuration
+const session = require("express-session");
+const passport = require("passport");
 
-const session = require('express-session');
+require("./config/passport");
+
+// ADD SESSION SETTINGS HERE:
+
 const MongoStore = require('connect-mongo');
-const DB_URL = 'mongodb://localhost/Memories_app'
+const DB_URL = 'mongodb://localhost/pm-app'
 
 app.use(
-	session({
-		secret: process.env.SESSION_SECRET,
-		// for how long is the user logged in -> this would be one day 	
-		cookie: { maxAge: 1000 * 60 * 60 * 24 },
-		resave: true,
-		saveUninitialized: false,
-		store: MongoStore.create({
-			mongoUrl: DB_URL
-		})
-	})
+  session({
+    secret: process.env.SESSION_SECRET,
+    // for how long is the user logged in -> this would be one day 	
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    resave: true,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: DB_URL
+    })
+  })
 )
+
+// USE passport.initialize() and passport.session() HERE:
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 // end of session configuration
 
 
