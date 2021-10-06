@@ -7,15 +7,32 @@ import MemoryCard from '../components/MemoryCard'
 export default function ProfilePage(props) {
 
     console.log('user is: ', props.user)
-    console.log('userID is: ', props.user._id)
+    
 
-    const [memories, setmemories] = useState([]);
+    // const [userId, setUserId] = useState();
+    const [data, setData] = useState([]);
+    const [memories, setMemories] = useState([]);
+    const [userMemories, setUserMemories] = useState([]);
+
+    let UserId = props.user._id
+
+    console.log('user id from browser: ', UserId);
+
+    function filterUserId(memory) {
+        if (memory.User){
+        return memory.User == UserId;
+        }
+     }
+    
 
     const getUserMemories = () => {
         axios.get(`/api/memories`)
             .then(response => {
-                console.log(response)
-                setmemories(response.data)
+                console.log('data is: ', response.data)
+                console.log('userId from database is: ', response.data.User)
+                setMemories(response.data)
+                setUserMemories(memories.filter(filterUserId))
+
             })
             .catch(err => console.log(err));
 
@@ -29,7 +46,7 @@ export default function ProfilePage(props) {
     return (
         <div>
             <h1>{props.user.username}'s Profile Page</h1>
-            {memories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
+            {userMemories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
             <br></br><br></br>
             <AddMemory refreshMemories={getUserMemories} />
         </div>
