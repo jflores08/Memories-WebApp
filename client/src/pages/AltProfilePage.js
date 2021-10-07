@@ -5,18 +5,25 @@ import MemoryCard from "../components/MemoryCard";
 import Map from '../Mapp'
 
 
-export default function MemoriesMapPage(props) {
+export default function AltProfilePage(props) {
 
 
     const api_URL = 'http://localhost:5005';
 
     const [memories, setmemories] = useState([]);
+    const[filterMemories, setFilterMemories] = useState([]);
+    let UserId = props.user._id
+
 
     const getUserMemories = () => {
         axios.get(`/api/memories`)
             .then(response => {
-                console.log(response)
-                setmemories(response.data)
+                console.log('response: ', response)
+                const data=response.data
+               const filtered = data.filter(
+                    data.User === UserId
+                )
+                console.log(filtered)
             })
             .catch(err => console.log(err));
 
@@ -26,11 +33,13 @@ export default function MemoriesMapPage(props) {
         getUserMemories();
     }, [])
 
+   
+
     return (
         <div>
-            <h1>Imagine a Memory Map 🦄 🗺 🌈</h1>
+            <h1>Alt Profile Page 🦄 🗺 🌈</h1>
 
-            {memories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
+            {filterMemories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
             <br></br><br></br>
 
             <AddMemory refreshMemories={getUserMemories} />

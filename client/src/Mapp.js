@@ -3,112 +3,67 @@ import './Mapp.css';
 import {useState, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import  ReactMapGl, { Marker, Popup } from 'react-map-gl';
-
-const mapAccessToken = process.env.MAPBOX_TOKEN
-console.log('Token: ', mapAccessToken)
-// Sample data 
-const data = [
-	{
-		"Title": "Manhattan Ave & Norman Ave at NE corner",
-		"city": "Brooklyn",
-		"state": "New York",
-		"location": [-73.9516030004786,40.72557300071668],
-	},
-	{
-		"Title": "6th Ave & 42nd St at NW corner",
-		"city": "Manhattan",
-		"state": "New York",
-		"location": [-73.98393399979334,40.75533300052329],
-	},
-	{
-		"Title": "Essex St & Delancey St at SE corner",
-		"city": "Manhattan",
-		"state": "New York",
-		"location": [-73.9882730001973,40.718207001246554],
-	}
-]
+import MemoryMarkers from './components/MemoryMarkers';
 
 
 
-export default function Map (props) {
+
+
+export default function Map () {
 	
-	// Set up states for updating map 
-	const [lng, setLng] = useState(-74);
-	const [lat, setLat] = useState(40.7128);
-	const [zoom, setZoom] = useState(10);
-	const [allMemories, setAllMemories] = useState([])
-	const [clickedEvent, setClickedEvent] = useState(null)
-    const [hoveredEvent, setHoveredEvent] = useState(null)
-    const [clickedFilterMenu, setClickedFilterMenu] = useState(false)
-	const [viewport, setViewport] = useState({
+
+    const [viewport, setViewport] = useState({
 		latitude : 40.755333,
 		longitude : -73.983933,
-		width : "100vw",
+		width : "80vw",
 		height : "100vh",
 		zoom : 10
 	})
 
-    const openFilterMenu = (e) => {
-       e.preventDefault()
-       setClickedFilterMenu(true)
-    }
-    const closeFilterMenu = (e) => {
-        e.preventDefault()
-        setClickedFilterMenu(false)
-    }
-	
-	// const center = [-73.98393399979334,40.75533300052329]
 
-	 
+	// Set up states for updating map 
 	
-		const getAllMemories = () => {
-			        axios.get(`/api/memories`)
-			             .then(res => {
-                            
-			                 setAllMemories(res.data)
-			             })
-			             .catch(err => console.log(err))
-			    }
+    const [memories, setMemories] = useState([]);
+	const [allMemories, setAllMemories] = useState([])
+    const [headline, setHeadline] = useState('')
 
-	useEffect(() => {
-        getAllMemories()
+
+  
+    // const getAllMemories = () =>{
+    //     axios.get(`/api/memories`)
+    //         .then(res => {
+    //             console.log('data', res.data)
+    //             setMemories(res.data)
+    //             console.log('memories should be here: ',memories)
+    //         })
+    //         .catch(err => console.log(err));
+    //         console.log ('Memories', memories)
+            
+    // }
+  
+    
+    // useEffect(() => {
+    //     getAllMemories();
+    //     console.log ('Set Memories', memories)
+        
+    // }, [])
+
+    const getUserMemories = () => {
+        axios.get(`/api/memories`)
+            .then(response => {
+                console.log(response)
+                setMemories(response.data)
+            })
+            .catch(err => console.log(err));
+
+    }
+
+    useEffect(() => {
+        getUserMemories();
     }, [])
 
-	// Create map and lay over markers
-
-        // const center = [13.4532321, 52.5331092]
-		
-
-       
-
-
-       
     
-        
-       
-        // const currentZoom = map.getZoom();
-        // console.log('The current zoom is: ', currentZoom);
-
-        const message = <p>hoy Mattie ⛵️🏴‍☠️</p>
-         const latitudePop = 53.4815
-		 const longitudePop = 14.4226
-
-        
-				
-     	
-		// data.forEach((location) => {
-		// 	console.log(location)
-		// 	// var marker = new mapboxgl.Marker()
-		// 				popup.setLngLat(location.location)
-		// 					// .setPopup(new mapboxgl.Popup({ offset: 30 })
-		// 					.setHTML('<h4>' + location.city + '</h4>' + location.Title)
-        //                     .setMaxWidth('100px')
-		// 					.addTo(map);
-
-		// })
-	
-
-	
+    console.log ('memerories: ', memories)
 		return(
 			<div>
 			<ReactMapGl
@@ -120,33 +75,10 @@ export default function Map (props) {
            }}
            >
                 
-               {/* const allMemories.map(memory => {
-
-                const coords = memory.location[0];
-                const formattedCoords = JSON.parse(coords);
-                const [headline, setHeadline] = useState('');
-                if  (tagline){
-                        setHeadline(memory.tagline);
-                    }else{
-                        setHeadline(memory.title);
-                }
-
-                    return (
-                        <div>
-                        <Marker 
-                        latitude={formattedCoords[0]} 
-                        longitude={formattedCoords[1]}
-                        >
-
-                            if(tagline){}
-                        ​       <h1 class='tagline'>{headline}</h1>
-                            </Marker>
-
-
-                        </div>
-                )}
-                ) */}
-
+               
+            <div>
+                
+            </div>
 
                 <Marker
                     latitude= {40.748817}
@@ -194,8 +126,7 @@ export default function Map (props) {
 ​
                 </Popup>
 
-                   
-			
+			{MemoryMarkers}
            </ReactMapGl>
 		</div>  
         

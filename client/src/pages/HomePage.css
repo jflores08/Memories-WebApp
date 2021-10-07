@@ -1,4 +1,25 @@
 #mapbox{
-   
-    padding: 10vw;
+   display: flex;
+    padding: 5vw 12vw;
+    justify-content: center;
+    align-items: center;
+
 }
+
+#HomePage{
+    background-image: url("./storyHomePage.jpeg");
+  background-size: cover;
+}
+
+#greeting{
+    /* background: rgba(212, 209, 192, 0.452); */
+    text-shadow: 1px 1px 0px;
+    color: #161515;
+}
+
+#logInRequest{
+    /* background: rgba(212, 209, 192, 0.452); */
+    text-shadow: 1px 1px 0px;
+    color: #161515;
+}
+

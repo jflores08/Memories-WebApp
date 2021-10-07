@@ -94,3 +94,84 @@ allMemories.map((memory) => {
          
 //      </div> */}
 //  {/* ): null} */}
+
+
+// const openFilterMenu = (e) => {
+//     e.preventDefault()
+//     setClickedFilterMenu(true)
+//  }
+//  const closeFilterMenu = (e) => {
+//      e.preventDefault()
+//      setClickedFilterMenu(false)
+//  }
+ 
+
+console.log('data is: ', response.data)
+                const coords = response.data[0].location[0]
+                const formattedCoords= JSON.parse(coords)
+                console.log('coords is: ', coords)
+                console.log('latatude is: ', formattedCoords[0])
+
+
+
+
+function getAllMemories() {
+    return(
+    axios.get(`/api/memories`)
+        .then(response => {
+            console.log('data is: ', response.data)
+            // const coords = response.data[0].location[0]
+            // const formattedCoords= JSON.parse(coords)
+            // console.log('coords is: ', coords)
+            // console.log('latatude is: ', formattedCoords[0])
+            // console.log('userId from database is: ', response.data.User)
+            setAllMemories(response.data)
+        
+            
+            console.log ('User Memories', allMemories)
+
+        })
+        .catch(err => console.log(err))
+    )
+}
+
+    // const getAllMemories = () => {
+    // 	        axios.get(`/api/memories`)
+    // 	             .then(res => {
+                        
+    // 	                 setAllMemories(res.data)
+    // 	             })
+    // 	             .catch(err => console.log(err))
+    // 	    }
+
+useEffect(() => {
+    getAllMemories()
+}, [])
+
+
+
+
+
+
+const getAllMemories = () => {
+    axios.get(`/api/memories`)
+        .then(response => {
+            console.log('data is: ', response.data)
+            const coords = response.data[0].location[0]
+            const formattedCoords= JSON.parse(coords)
+            console.log('coords is: ', coords)
+            console.log('latatude is: ', formattedCoords[0])
+            console.log('userId from database is: ', response.data.User)
+            setMemories(response.data)
+            console.log ('Memories', memories)
+            setAllMemories(memories)
+            console.log ('All Memories', allMemories)
+
+        })
+        .catch(err => console.log(err));
+
+}
+
+useEffect(() => {
+    getAllMemories();
+}, [])

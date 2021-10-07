@@ -120,7 +120,7 @@ export default function AddMemory(props) {
                     onChange={e => SetRadius(e.target.value)}
 
                 />
-
+                <br></br><br></br>
                 <button type='submit'>Add Memory</button>
             </form>
 

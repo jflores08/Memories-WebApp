@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from "axios";
+import './ProfilePage.css'
 import { useState, useEffect } from "react"
 import AddMemory from '../components/AddMemory'
 import MemoryCard from '../components/MemoryCard'
@@ -36,8 +37,8 @@ export default function ProfilePage(props) {
                 console.log('userId from database is: ', response.data.User)
                 setMemories(response.data)
             
-                setUserMemories(memories.filter(filterUserId))
-                console.log ('User Memories', userMemories)
+                // setUserMemories(memories.filter(filterUserId))
+                console.log ('User Memories', memories)
 
             })
             .catch(err => console.log(err));
@@ -52,9 +53,11 @@ export default function ProfilePage(props) {
     return (
         <div>
             <h1>{props.user.username}'s Profile Page</h1>
+
+            <div id='userMemoryBody'>
+            <AddMemory  refreshMemories={getUserMemories} />
             {userMemories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
-            <br></br><br></br>
-            <AddMemory refreshMemories={getUserMemories} />
+            </div>
         </div>
     )
 }

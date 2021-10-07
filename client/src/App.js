@@ -11,6 +11,7 @@ import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import socketIOClient from 'socket.io-client';
 import ProfilePage from './pages/ProfilePage';
+import AltProfilePage from './pages/AltProfilePage'
 
 const socket = socketIOClient('http://localhost:5005')
 
@@ -56,7 +57,7 @@ function App(props) {
           user={user}
           setUser={addUser}
           {...props}
-          component={ProfilePage}
+          component={AltProfilePage}
          />
 
         <Route exact path='/memories/:id' component={MemoryDetailPage} />
