@@ -44,7 +44,7 @@ export default function MemoryEditPage(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const requestBody = {title, description, pic, tagline };
+        const requestBody = {title, description, pic, tagline, location };
         axios.put(`/api/memories/${memoryId}`, requestBody)
             .then(response => {
                 props.history.push(`/memories/${memoryId}`);
@@ -128,6 +128,17 @@ export default function MemoryEditPage(props) {
                                     value={radius}
                                     onChange={e => SetRadius(e.target.value)}
 
+                                />
+
+                                <br></br><br></br>
+
+                            <label htmlFor='radius'> Location: </label>
+                                <input
+
+                                    type='array'
+                                    name='radius'
+                                    value={location}
+                                    onChange={e => setLocation(e.target.value)}
                                 />
 
                                 <button type='submit'>Update Memory</button>

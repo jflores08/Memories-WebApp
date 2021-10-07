@@ -35,6 +35,7 @@ export default function MemoryDetailPage(props) {
                 <>
                     <h1>{memory.title}</h1>
                     <p>{memory.description}</p>
+                    <p>{memory.location}</p>
                     
                     <Link to={`/memories/edit/${memory._id}`}>
                         <button>Edit Memory</button>

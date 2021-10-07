@@ -3,6 +3,12 @@ import { useState } from "react";
 
 export default function AddMemory(props) {
 
+    // console.log('location lat : ', props.location.coords.latitude);
+    // console.log('location long: ', props.location.coords.longitude);
+
+
+    // console.log('location cords: ', navigator.geolocation.getCurrentPosition(success, error));
+
     const api_URL = 'http://localhost:5005';
 
     const [title, setTitle] = useState('');
