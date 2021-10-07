@@ -33,7 +33,7 @@ router.post('/add', (req, res, next) => {
     pic: '',
     tagline: tagline,
     tags: '',
-    location: '',
+    location: Array,
     radius: radius,
     User: req.session.user._id,
     createdAt: null,

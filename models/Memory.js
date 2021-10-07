@@ -8,7 +8,7 @@ const memorySchema = new Schema({
     tags: [String],
     description: String,
     pic: String,
-    location: [String],
+    location: Array,
     radius: Number,
     likeCount: Number,
     User: {

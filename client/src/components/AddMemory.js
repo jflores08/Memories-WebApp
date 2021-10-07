@@ -101,13 +101,13 @@ export default function AddMemory(props) {
                 />
                 <br></br><br></br>
 
-                <label htmlFor='radius'> Radius: </label>
+                <label htmlFor='location'> Location: </label>
                 <input
 
-                    type='number'
-                    name='radius'
-                    value={radius}
-                    onChange={e => SetRadius(e.target.value)}
+                    type='array'
+                    name='location'
+                    value={location}
+                    onChange={e => setLocation(e.target.value)}
 
                 />
 

@@ -29,6 +29,10 @@ export default function ProfilePage(props) {
         axios.get(`/api/memories`)
             .then(response => {
                 console.log('data is: ', response.data)
+                const coords = response.data[0].location[0]
+                const formattedCoords= JSON.parse(coords)
+                console.log('coords is: ', coords)
+                console.log('latatude is: ', formattedCoords[0])
                 console.log('userId from database is: ', response.data.User)
                 setMemories(response.data)
             
