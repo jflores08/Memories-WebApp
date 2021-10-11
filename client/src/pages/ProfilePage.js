@@ -4,7 +4,7 @@ import './ProfilePage.css'
 import { useState, useEffect } from "react"
 import AddMemory from '../components/AddMemory'
 import MemoryCard from '../components/MemoryCard'
-
+import UMap from '../components/UserMemoryMap';
 export default function ProfilePage(props) {
 
     console.log('user is: ', props.user)
@@ -58,6 +58,12 @@ export default function ProfilePage(props) {
             <AddMemory  refreshMemories={getAllMemories} />
             {userMemories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
             </div>
+
+             {/* <div id='map' style={{width: '100vw', height: '100vh'}}></div> */}
+            <div id='mapbox'>
+                    {/* <Map onStyleLoad={ el => this.map = el }/> */}
+                    <UMap />
+                </div>
         </div>
     )
 }

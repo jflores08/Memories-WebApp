@@ -1,5 +1,5 @@
 import React from 'react'
-import Map from '../MapboxMap'
+import Map from '../AllMemoriesMap'
 import './HomePage.css'
 import { useState, useEffect } from 'react';
 import GeoLocation from '../components/GetLocation';

@@ -2,8 +2,8 @@ import axios from "axios";
 import { useState, useEffect } from "react"
 import AddMemory from "../components/AddMemory";
 import MemoryCard from "../components/MemoryCard";
-import Map from '../Mapp'
-
+import UMap from '../components/UserMemoryMap'
+import './AltProfilePage.css'
 
 export default function AltProfilePage(props) {
 
@@ -43,7 +43,8 @@ export default function AltProfilePage(props) {
 
     return (
         <div>
-            <h1>Alt Profile Page 🦄 🗺 🌈</h1>
+            <h1 id='greeting'>{props.user.username}'s Profile Page </h1>
+                <h2 id = 'User Icon'>🗺</h2>
 
             
 
@@ -52,6 +53,13 @@ export default function AltProfilePage(props) {
 
             <AddMemory refreshMemories={getUserMemories} />
             
+
+             
+             <div id='mapbox'>
+                    {/* <Map onStyleLoad={ el => this.map = el }/> */}
+                    <UMap {...data}/>
+                </div>
+
         </div>
     )
 }

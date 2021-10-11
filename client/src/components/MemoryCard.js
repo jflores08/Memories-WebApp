@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 export default function MemoryListCard(props) {
-    console.log(props);
+    console.log('Memory Card props: ', props);
     return (
         <div>
             <Link to={`/memories/${props._id}`}>

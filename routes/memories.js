@@ -27,7 +27,7 @@ router.get("/user/:id", (req, res, next) => {
 
 //create a  memory
 router.post('/add', (req, res, next) => {
-  const { title, description, pic, tagline, radius, } = req.body;
+  const { title, description, pic, tagline, radius, latitude, longitude, privacy} = req.body;
   console.log('This is the session from post route: ', req.session.user)
 
   Memory.create({
@@ -36,11 +36,13 @@ router.post('/add', (req, res, next) => {
     pic: '',
     tagline: tagline,
     tags: '',
-    location: Array,
+    latitude: latitude,
+    longitude: longitude,
     radius: radius,
     User: req.session.user._id,
     createdAt: null,
-    likeCount: 0
+    likeCount: 0,
+    privacy: privacy
 
   })
     .then(memory => {
@@ -75,8 +77,8 @@ router.get('/:id', (req, res, next) => {
 
 //update a memory
 router.put('/:id', (req, res, next) => {
-  const { title, description, pic, tagline, location, radius } = req.body;
-  Memory.findByIdAndUpdate(req.params.id, { title: title, description: description, pic: pic, tagline: tagline, location: location, radius: radius }, { new: true })
+  const { title, description, pic, tagline, latitude, longitude, radius } = req.body;
+  Memory.findByIdAndUpdate(req.params.id, { title: title, description: description, pic: pic, tagline: tagline, latitude: latitude, longitude: longitude, radius: radius }, { new: true })
     .then(updatedMemory => {
       res.status(200).json(updatedMemory);
     })

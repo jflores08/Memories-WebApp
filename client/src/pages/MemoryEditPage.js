@@ -15,7 +15,9 @@ export default function MemoryEditPage(props) {
 	const [description, setDescription] = useState('');
     const [pic, setPic] = useState('');
     const [tagline, setTagline] = useState('');
-    const [location, setLocation] = useState([]);
+    const [privacy, setPrivacy] = useState(false);
+    const [latitude, setLatitude] = useState([]);
+    const [longitude, setLongitude] = useState([]);
     const [radius, SetRadius] = useState(1);
 
     useEffect(() => {
@@ -27,7 +29,9 @@ export default function MemoryEditPage(props) {
             setDescription(response.data.description)
             setPic(response.data.pic)
             setTagline(response.data.tagline)
-            setLocation(response.data.location)
+            setPrivacy(response.data.Private)
+            setLatitude(response.data.latitude)
+            setLongitude(response.data.longitude)
             SetRadius(response.data.radius)
 
         })
@@ -44,9 +48,10 @@ export default function MemoryEditPage(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const requestBody = {title, description, pic, tagline, location };
+        const requestBody = {title, description, pic, tagline, privacy, latitude, longitude, radius };
         axios.put(`/api/memories/${memoryId}`, requestBody)
             .then(response => {
+                console.log('Private? ', privacy)
                 props.history.push(`/memories/${memoryId}`);
             })
             .catch(err => console.log(err))
@@ -118,6 +123,22 @@ export default function MemoryEditPage(props) {
                                     onChange={e => setTagline(e.target.value)}
 
                                 />
+
+                            <label htmlFor='Privacy'>Private/Public: </label>
+                                <select name ='Privacy' id ="Privacy">
+                                    <option value={false}>Public</option>
+                                    <option value={true}>Private</option>
+                                    onChange={e => setPrivacy(e.target.value)}
+                                </select>
+                                
+                                {/* <input
+
+                                    type='text'
+                                    name='tagline'
+                                    value={tagline}
+                                    onChange={e => setTagline(e.target.value)}
+
+                                /> */}
                                 <br></br><br></br>
 
                             <label htmlFor='radius'> Radius: </label>
@@ -132,13 +153,23 @@ export default function MemoryEditPage(props) {
 
                                 <br></br><br></br>
 
-                            <label htmlFor='radius'> Location: </label>
+                            <label htmlFor='latitude'> Latitude: </label>
                                 <input
 
                                     type='array'
-                                    name='radius'
-                                    value={location}
-                                    onChange={e => setLocation(e.target.value)}
+                                    name='latitude'
+                                    value={latitude}
+                                    onChange={e => setLatitude(e.target.value)}
+                                />
+
+
+                            <label htmlFor='longitude'> Longitude: </label>
+                                <input
+
+                                    type='array'
+                                    name='longitude'
+                                    value={longitude}
+                                    onChange={e => setLongitude(e.target.value)}
                                 />
 
                                 <button type='submit'>Update Memory</button>

@@ -8,9 +8,11 @@ const memorySchema = new Schema({
     tags: [String],
     description: String,
     pic: String,
-    location: Array,
+    latitude: Number,
+    longitude: Number,
     radius: Number,
     likeCount: Number,
+    privacy: Boolean,
     User: {
         type: Schema.Types.ObjectId,
         ref: 'User'

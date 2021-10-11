@@ -16,7 +16,9 @@ export default function AddMemory(props) {
     const [pic, setPic] = useState('');
     const [tagline, setTagline] = useState('');
     const [tags, setTags] = useState([]);
-    const [location, setLocation] = useState([]);
+    const [privacy, setPrivacy] = useState(false);
+    const [latitude, setLatitude] = useState([]);
+    const [longitude, setLongitude] = useState([]);
     const [radius, SetRadius] = useState(1);
     const [likeCount, SetLikeCount] = useState(0);
     const [createdAT, setCreatedAt] = useState({});
@@ -25,7 +27,7 @@ export default function AddMemory(props) {
         e.preventDefault();
 
         // add pic
-        const requestBody = { title, description, pic, tagline, location, radius };
+        const requestBody = { title, description, pic, tagline, privacy, latitude, longitude, radius };
         console.log(requestBody);
         axios.post(`/api/memories/add`, requestBody)
 
@@ -34,8 +36,10 @@ export default function AddMemory(props) {
                 setDescription('');
                 setPic('');
                 setTagline('');
+                setPrivacy();
                 setTags();
-                setLocation([]);
+                setLatitude([]);
+                setLongitude([]);
                 SetRadius();
                 SetLikeCount();
                 setCreatedAt({});
@@ -99,9 +103,16 @@ export default function AddMemory(props) {
                     onChange={e => setTagline(e.target.value)}
 
                 />
+
+                <label htmlFor='Privacy'>Private/Public: </label>
+                                <select name ='Privacy' id ="Privacy">
+                                    <option value='false'>Public</option>
+                                    <option value='True'>Private</option>
+                                    onChange={e => setPrivacy(e.target.value)}
+                                </select>
                 <br></br><br></br>
 
-                {/* <label htmlFor='latitude'> Latitude: </label>
+                <label htmlFor='latitude'> Latitude: </label>
                 <input
 
                     type='number'
@@ -109,14 +120,14 @@ export default function AddMemory(props) {
                     value={latitude}
                     onChange={e => setLatitude(e.target.value)}
 
-                /> */}
-                <label htmlFor='location'> Longitude: </label>
+                />
+                <label htmlFor='longitude'> Longitude: </label>
                 <input
 
                     type='array'
-                    name='location'
-                    value={location}
-                    onChange={e => setLocation(e.target.value)}
+                    name='longitude'
+                    value={longitude}
+                    onChange={e => setLongitude(e.target.value)}
 
                 />
 
