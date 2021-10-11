@@ -13,14 +13,17 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// //get all memories
-// router.get('/', (req, res, next) =>{
-//   Memory.find()
-//     .then(memories =>{
-//        res.status(200).json(memories);
-//     })
-//     .catch(err => next(err));
-// });
+// get user's audio files
+router.get("/user/:id", (req, res, next) => {
+  Memory.find({ User: req.params.id })
+  .then(memories => {
+    console.log(memories);
+    res.status(200).json(memories)
+  })
+  .catch((err) => next(err));
+});
+
+
 
 //create a  memory
 router.post('/add', (req, res, next) => {

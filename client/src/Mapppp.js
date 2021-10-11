@@ -170,7 +170,7 @@ const data = [
                 //log All Memories
                 console.log ('All Memories', allMemories)
                     
-                         memoriez.map(memory => {
+                         memories.map(memory => {
             
                         const coords = memory.location[0];
                         const formattedCoords = JSON.parse(coords);
@@ -247,4 +247,39 @@ const data = [
                                 </div>
                         )}
                         )
-                    
+
+                        
+
+
+
+                        {memories.map((event) => {
+                            const coords = memory.location[0];
+                            const formattedCoords = JSON.parse(coords);
+                            return (
+                               <Marker 
+                               latitude={formattedCoords[0]} 
+                               longitude={formattedCoords[1]}
+                               >
+                                 <p>{event.location.name}</p>  
+                               </Marker>
+                            )
+                        })}
+
+
+
+
+
+
+
+
+                        <div>
+            <Geocoder
+          mapRef={this.mapRef}
+          mapboxApiAccessToken={mapboxToken}
+          onSelected={this.handleResult}
+          onViewportChange={this.handleGeocoderViewportChange}
+          countries="us"
+          position="top-right"
+          placeholder="Search here!"
+        />
+            </div>

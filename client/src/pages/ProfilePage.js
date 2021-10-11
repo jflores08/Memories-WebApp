@@ -26,7 +26,7 @@ export default function ProfilePage(props) {
      }
     
 
-    const getUserMemories = () => {
+    const getAllMemories = () => {
         axios.get(`/api/memories`)
             .then(response => {
                 console.log('data is: ', response.data)
@@ -46,7 +46,7 @@ export default function ProfilePage(props) {
     }
 
     useEffect(() => {
-        getUserMemories();
+        getAllMemories();
     }, [])
 
 
@@ -55,7 +55,7 @@ export default function ProfilePage(props) {
             <h1>{props.user.username}'s Profile Page</h1>
 
             <div id='userMemoryBody'>
-            <AddMemory  refreshMemories={getUserMemories} />
+            <AddMemory  refreshMemories={getAllMemories} />
             {userMemories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
             </div>
         </div>

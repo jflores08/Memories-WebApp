@@ -25,7 +25,7 @@ export default function AddMemory(props) {
         e.preventDefault();
 
         // add pic
-        const requestBody = { title, description, pic, tagline, radius };
+        const requestBody = { title, description, pic, tagline, location, radius };
         console.log(requestBody);
         axios.post(`/api/memories/add`, requestBody)
 
@@ -101,7 +101,16 @@ export default function AddMemory(props) {
                 />
                 <br></br><br></br>
 
-                <label htmlFor='location'> Location: </label>
+                {/* <label htmlFor='latitude'> Latitude: </label>
+                <input
+
+                    type='number'
+                    name='latitude'
+                    value={latitude}
+                    onChange={e => setLatitude(e.target.value)}
+
+                /> */}
+                <label htmlFor='location'> Longitude: </label>
                 <input
 
                     type='array'

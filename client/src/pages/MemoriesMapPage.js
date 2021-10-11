@@ -12,7 +12,7 @@ export default function MemoriesMapPage(props) {
 
     const [memories, setmemories] = useState([]);
 
-    const getUserMemories = () => {
+    const getAllMemories = () => {
         axios.get(`/api/memories`)
             .then(response => {
                 console.log(response)
@@ -23,7 +23,7 @@ export default function MemoriesMapPage(props) {
     }
 
     useEffect(() => {
-        getUserMemories();
+        getAllMemories();
     }, [])
 
     return (
@@ -33,7 +33,7 @@ export default function MemoriesMapPage(props) {
             {memories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
             <br></br><br></br>
 
-            <AddMemory refreshMemories={getUserMemories} />
+            <AddMemory refreshMemories={getAllMemories} />
             
         </div>
     )

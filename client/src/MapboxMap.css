@@ -1,0 +1,17 @@
+.map-container {
+    height: 400px;
+    width: 80vw;
+    }
+     
+    .sidebar {
+    background-color: rgba(7, 31, 170, 0.376);
+    color: rgb(244, 247, 243);
+    padding: 6px 12px;
+    font-family: monospace;
+    z-index: 1;
+    position: absolute;
+    /* top: 0;
+    left: 0; */
+    margin: 12px;
+    border-radius: 4px;
+    }

@@ -9,37 +9,45 @@ export default function AltProfilePage(props) {
 
 
     const api_URL = 'http://localhost:5005';
-
+    const [data, setData] = useState([]);
     const [memories, setmemories] = useState([]);
-    const[filterMemories, setFilterMemories] = useState([]);
+    const[userMemories, setUserMemories] = useState([]);
     let UserId = props.user._id
 
-
+//Get User memories
     const getUserMemories = () => {
-        axios.get(`/api/memories`)
+        axios.get(`/api/memories/user/${UserId}`)
             .then(response => {
-                console.log('response: ', response)
-                const data=response.data
-               const filtered = data.filter(
-                    data.User === UserId
-                )
-                console.log(filtered)
+                console.log('UserId: ', UserId)
+                 console.log('response: ', response)
+                 setData(response.data)  
+               
+
             })
             .catch(err => console.log(err));
 
     }
+                
 
     useEffect(() => {
         getUserMemories();
     }, [])
 
-   
+
+
+
+    console.log('The data is: ', data)
+    console.log('fiilteredMemories: ', userMemories)
+    
+
 
     return (
         <div>
             <h1>Alt Profile Page 🦄 🗺 🌈</h1>
 
-            {filterMemories.map(memory => <MemoryCard key={memory._id} {...memory} />)}
+            
+
+            {data.map(memory => <MemoryCard key={memory._id} {...memory} />)}
             <br></br><br></br>
 
             <AddMemory refreshMemories={getUserMemories} />

@@ -17,7 +17,7 @@ export default function MemoryMarkers(props) {
     let UserId = props.user._id
 
     const[filtered, setFiltered] = useState([]);
-    const getUserMemories = () => {
+    const getAllMemories = () => {
         axios.get(`/api/memories`)
             .then(response => {
                 console.log('response: ', response)
@@ -35,7 +35,7 @@ export default function MemoryMarkers(props) {
 
 
          useEffect(() => {
-        getUserMemories();
+        getAllMemories();
     }, [])
 
    
