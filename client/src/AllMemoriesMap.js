@@ -17,7 +17,7 @@ function Map() {
       };
 
 
-       // const [clickedEvent, setClickedEvent] = useState(null)
+       // const map variables
     const [hoveredEvent, setHoveredEvent] = useState(null)
     const [lat, setLat] = useState(40.748817);
     const [lng, setLng] = useState(-73.985428);
@@ -25,7 +25,7 @@ function Map() {
    const [viewport, setViewport] = useState({
        latitude : lat,
        longitude : lng,
-       width : "100vw",
+       width : "85vw",
        height : "100vh",
        zoom : 10
    })
@@ -39,9 +39,9 @@ function Map() {
             const [allMemories, setAllMemories] = useState([])
             const [headline, setHeadline] = useState('')
     
-            // Get the Memory files from the server
+            // Get the Public Memory files from the server
             const getAllMemories = () => {
-                axios.get(`/api/memories`)
+                axios.get(`/api/memories/public`)
                     .then(response => {
                         console.log('Get marker data: ', response)
                         setMemories(response.data)

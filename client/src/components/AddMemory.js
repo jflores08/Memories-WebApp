@@ -16,7 +16,7 @@ export default function AddMemory(props) {
     const [pic, setPic] = useState('');
     const [tagline, setTagline] = useState('');
     const [tags, setTags] = useState([]);
-    const [privacy, setPrivacy] = useState(false);
+    const [privacy, setPrivacy] = useState(true);
     const [latitude, setLatitude] = useState([]);
     const [longitude, setLongitude] = useState([]);
     const [radius, SetRadius] = useState(1);
@@ -104,12 +104,12 @@ export default function AddMemory(props) {
 
                 />
 
-                <label htmlFor='Privacy'>Private/Public: </label>
-                                <select name ='Privacy' id ="Privacy">
-                                    <option value='false'>Public</option>
-                                    <option value='True'>Private</option>
-                                    onChange={e => setPrivacy(e.target.value)}
-                                </select>
+                <label htmlFor='privacy'>Private/Public: </label>
+                        <select name ='Privacy' id ="Privacy" onChange={(e) => setPrivacy(e.target.value)}>
+                            <option value='false'>Public</option>
+                            <option value='true'>Private</option>
+                                    
+                        </select>
                 <br></br><br></br>
 
                 <label htmlFor='latitude'> Latitude: </label>

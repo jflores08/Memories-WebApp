@@ -48,10 +48,11 @@ export default function MemoryEditPage(props) {
 
     const handleSubmit = e => {
         e.preventDefault();
+        console.log('Private? ', privacy)
         const requestBody = {title, description, pic, tagline, privacy, latitude, longitude, radius };
         axios.put(`/api/memories/${memoryId}`, requestBody)
             .then(response => {
-                console.log('Private? ', privacy)
+                
                 props.history.push(`/memories/${memoryId}`);
             })
             .catch(err => console.log(err))
@@ -124,19 +125,19 @@ export default function MemoryEditPage(props) {
 
                                 />
 
-                            <label htmlFor='Privacy'>Private/Public: </label>
-                                <select name ='Privacy' id ="Privacy">
-                                    <option value={false}>Public</option>
-                                    <option value={true}>Private</option>
-                                    onChange={e => setPrivacy(e.target.value)}
+                            <label htmlFor='privacy'>Private/Public: </label>
+                                <select name ='Privacy' id ="Privacy" onChange={(e) => setPrivacy(e.target.value)}>
+                                    <option value='false'>Public</option>
+                                    <option value='true'>Private</option>
+                                    
                                 </select>
                                 
                                 {/* <input
 
-                                    type='text'
-                                    name='tagline'
-                                    value={tagline}
-                                    onChange={e => setTagline(e.target.value)}
+                                    type='boolean'
+                                    name='privacy'
+                                    value={privacy}
+                                    onChange={e => setPrivacy(e.target.value)}
 
                                 /> */}
                                 <br></br><br></br>

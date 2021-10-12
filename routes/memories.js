@@ -13,7 +13,17 @@ router.get('/', (req, res, next) => {
     .catch(err => next(err));
 });
 
-// get user's audio files
+// get public memories
+router.get("/public", (req, res, next) => {
+  Memory.find({ privacy: false })
+  .then(memories => {
+    console.log(memories);
+    res.status(200).json(memories)
+  })
+  .catch((err) => next(err));
+});
+
+// get user's memories
 router.get("/user/:id", (req, res, next) => {
   Memory.find({ User: req.params.id })
   .then(memories => {
@@ -77,8 +87,8 @@ router.get('/:id', (req, res, next) => {
 
 //update a memory
 router.put('/:id', (req, res, next) => {
-  const { title, description, pic, tagline, latitude, longitude, radius } = req.body;
-  Memory.findByIdAndUpdate(req.params.id, { title: title, description: description, pic: pic, tagline: tagline, latitude: latitude, longitude: longitude, radius: radius }, { new: true })
+  const { title, description, pic, tagline, privacy, latitude, longitude, radius } = req.body;
+  Memory.findByIdAndUpdate(req.params.id, { title: title, description: description, pic: pic, tagline: tagline, privacy: privacy, latitude: latitude, longitude: longitude, radius: radius }, { new: true })
     .then(updatedMemory => {
       res.status(200).json(updatedMemory);
     })

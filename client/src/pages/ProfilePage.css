@@ -1,7 +1,7 @@
-body{
+/* body{
     background-image: url("../Images/createMemoryPage.jpeg");
   background-size: cover;
-}
+} */
 #userMemoryBody{
     display: flex;
     flex-direction: row;

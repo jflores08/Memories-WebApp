@@ -1,6 +1,16 @@
 import { Link } from 'react-router-dom';
+import { useState } from "react";
+
+
 
 export default function MemoryListCard(props) {
+    const[privacy,setPrivacy] = useState('Test');
+    // if (props.privacy){
+    //     setPrivacy('Private')
+    // } else{
+    //     setPrivacy('Public')
+    // }
+
     console.log('Memory Card props: ', props);
     return (
         <div>
@@ -10,6 +20,7 @@ export default function MemoryListCard(props) {
 
            
                  <p>{props.description}</p>
+                 <p>{props.privacy}</p>
         </div>
     )
 }

@@ -6,7 +6,6 @@ import './UserMemoryMap.css'
 
 function UMap(props) {
     
-    
     const navControlStyle= {
         right: 10,
         top: 10
@@ -18,7 +17,7 @@ function UMap(props) {
       };
 
 
-       // const [clickedEvent, setClickedEvent] = useState(null)
+       // const map variables
     const [hoveredEvent, setHoveredEvent] = useState(null)
     const [lat, setLat] = useState(40.748817);
     const [lng, setLng] = useState(-73.985428);
@@ -26,7 +25,7 @@ function UMap(props) {
    const [viewport, setViewport] = useState({
        latitude : lat,
        longitude : lng,
-       width : "100vw",
+       width : "85vw",
        height : "100vh",
        zoom : 10
    })
@@ -36,18 +35,35 @@ function UMap(props) {
 
 
             // Set up states for placing Markers on map 
-            const [memories, setMemories] = useState([]);
-            const [userMemories, setUserMemories] = useState([])
+            const [userMemories, setUserMemories] = useState([]);
+            const [allMemories, setAllMemories] = useState([])
             const [headline, setHeadline] = useState('')
     
-            // Get the Memory files from the server
-           
+            let UserId = props.user._id
+          
     
             
-       
 
-        
-            console.log('props are: ', props)
+            //Get User memories
+                const getUserMemories = () => {
+                    axios.get(`/api/memories/user/${UserId}`)
+                        .then(response => {
+                            console.log('UserId: ', UserId)
+                            console.log('response: ', response)
+                            setUserMemories(response.data)  
+                        
+
+                        })
+                        .catch(err => console.log(err));
+
+                }
+                            
+
+                useEffect(() => {
+                    getUserMemories();
+                }, [])
+                
+    
   
    
 
@@ -87,8 +103,8 @@ function UMap(props) {
 
 
 
-           
-        {/* {((props) && (props.map((memory) => {
+
+        {userMemories.map((memory) => {
                             
                 
                             
@@ -104,24 +120,10 @@ function UMap(props) {
 
                                </Marker>
                             )
-                        })))} */}
+                        })}
               
 
 
-
-
-              {hoveredEvent ? (
-                   <Popup
-                   latitude={40.748817} 
-                   longitude={-73.985428}
-
-                  >
-                   <div>
-                       <h1>Hello ⛵️🏴‍☠️</h1>
-                   </div>
-​
-                   </Popup>
-               ) : null} 
            </ReactMapGl>
             
         </div>

@@ -4,7 +4,7 @@ import './ProfilePage.css'
 import { useState, useEffect } from "react"
 import AddMemory from '../components/AddMemory'
 import MemoryCard from '../components/MemoryCard'
-import UMap from '../components/UserMemoryMap';
+import UMap from '../UserMemoryMap';
 export default function ProfilePage(props) {
 
     console.log('user is: ', props.user)

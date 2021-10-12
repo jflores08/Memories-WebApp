@@ -29,9 +29,9 @@ export default function HomePage(props) {
             <br></br><br></br>
             <h2 id='logInRequest'>Log In to leave your own</h2>
 
-            <GeoLocation />
+            {/* <GeoLocation /> */}
 
-            {/* <div id='map' style={{width: '100vw', height: '100vh'}}></div> */}
+            {/* <div id='map' style={{width: '100vw', height: '80vh'}}></div> */}
                 <div id='mapbox'>
                     {/* <Map onStyleLoad={ el => this.map = el }/> */}
                     <Map />
