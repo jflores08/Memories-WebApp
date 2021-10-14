@@ -127,6 +127,7 @@ export default function MemoryEditPage(props) {
 
                             <label htmlFor='privacy'>Private/Public: </label>
                                 <select name ='Privacy' id ="Privacy" onChange={(e) => setPrivacy(e.target.value)}>
+                                    <option >Public/Private</option>
                                     <option value='false'>Public</option>
                                     <option value='true'>Private</option>
                                     
